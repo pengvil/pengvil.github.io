@@ -12,24 +12,21 @@ const PROFILE = {
     title: "Ecommerce Store",
     desc: "Full stack ecommerce store with login, product filtering and categorized product view.",
     image: "assets/projects/Ecommerce Store/UI.png",
-    github: "https://github.com/pengvil/your-repo",
-    live: "#"
+    github: "https://mern-store-gold.vercel.app/",
+    live: "https://mern-store-gold.vercel.app/"
     },
 
     {
     title: "Library Management System",
     desc: "Java based system for managing books, borrowers and return dates with structured storage.",
     image: "assets/projects/Library_Management_System/UI.png",
-    github: "#",
-    live: "#"
+    github: "https://github.com/pengvil/Library-Management-System"
     },
 
     {
     title: "Line Following Robot",
     desc: "Autonomous robot using IR sensors and PID motor control for accurate line tracking.",
-    image: "assets/projects/Line_Follower_Robot/The_Bot.png",
-    github: "#",
-    live: "#"
+    image: "assets/projects/Line_Follower_Robot/The_Bot.png"
     }
 
   ],
