@@ -12,42 +12,78 @@
 
 <body>
   <nav class="nav">
-    <div class="nav-logo" id="navName">Your Name</div>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
-  </nav>
+  <div class="nav-logo" id="navName">Your Name</div>
 
-  <main>
-    <section class="hero">
-      <h1 id="heroName">Your Name</h1>
-      <p id="heroRole">Your role line</p>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-      <div class="hero-ctas">
-        <a class="btn btn-fill" href="#projects">View Projects</a>
-        <a class="btn btn-outline" id="cvBtn" href="CV.pdf" download>Download CV</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+</nav>
+
+<main class="page">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-name" id="heroName">Your Name</h1>
+        <p class="hero-role" id="heroRole">Your role</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-fill" href="#contact">Get in touch</a>
+          <a class="btn btn-outline" href="CV.pdf" download>Download CV</a>
+        </div>
       </div>
-    </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="grid" id="projectsGrid"></div>
-    </section>
+      <div class="hero-right">
+        <div class="photo-card">
+          <img id="heroPhoto" class="photo-img" src="" alt="Profile photo">
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="research">
-      <h2>Research</h2>
-      <div class="grid" id="researchGrid"></div>
-    </section>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2 class="section-title" id="aboutTitle">About Me</h2>
+    <p class="section-text" id="aboutText">...</p>
+  </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a id="emailLink" href="#">—</a></p>
-      <p>GitHub: <a id="githubLink" href="#" target="_blank" rel="noreferrer">—</a></p>
-      <p>LinkedIn: <a id="linkedinLink" href="#" target="_blank" rel="noreferrer">—</a></p>
-    </section>
-  </main>
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-text">Click an icon or send a message.</p>
+
+    <div class="contact-row">
+      <div class="socials">
+        <a class="icon-btn" id="emailBtn" href="#" aria-label="Email">
+          ✉️
+        </a>
+        <a class="icon-btn" id="githubBtn" href="#" target="_blank" rel="noreferrer" aria-label="GitHub">
+          🐙
+        </a>
+        <a class="icon-btn" id="linkedinBtn" href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          💼
+        </a>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-grid">
+          <input id="cName" type="text" placeholder="Your name" required>
+          <input id="cEmail" type="email" placeholder="Your email" required>
+        </div>
+        <input id="cSubject" type="text" placeholder="Subject" required>
+        <textarea id="cMessage" rows="5" placeholder="Write your message..." required></textarea>
+        <button class="btn btn-fill" type="submit">Send Message →</button>
+        <p class="form-hint">This opens your email app (works on GitHub Pages).</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span id="footerCopy">© 2026 Your Name</span>
+  </footer>
+</main>
 </body>
 </html>
