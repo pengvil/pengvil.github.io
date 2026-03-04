@@ -6,7 +6,7 @@ const PROFILE = {
     aboutTitle: "About Me",
   aboutText:
     "I’m a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.",
-    
+
   email: "zahidul.islam.navil@gmail.com",
   github: "https://github.com/pengvil",
   linkedin: "https://www.linkedin.com/in/md-zahidul-islam-navil/",
@@ -16,7 +16,7 @@ const PROFILE = {
     {
     title: "Ecommerce Store",
     desc: "Full stack ecommerce store with login, product filtering and categorized product view.",
-    image: "assets/projects/Ecommerce_store/UI.png",
+    image: "assets/projects/Ecommerce_Store/UI.png",
     live: "https://mern-store-gold.vercel.app/"
     },
 
