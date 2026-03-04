@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Portfolio</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="data/profile.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-logo" id="navName">Your Name</div>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1 id="heroName">Your Name</h1>
+      <p id="heroRole">Your role line</p>
+
+      <div class="hero-ctas">
+        <a class="btn btn-fill" href="#projects">View Projects</a>
+        <a class="btn btn-outline" id="cvBtn" href="CV.pdf" download>Download CV</a>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid" id="projectsGrid"></div>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="grid" id="researchGrid"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a id="emailLink" href="#">—</a></p>
+      <p>GitHub: <a id="githubLink" href="#" target="_blank" rel="noreferrer">—</a></p>
+      <p>LinkedIn: <a id="linkedinLink" href="#" target="_blank" rel="noreferrer">—</a></p>
+    </section>
+  </main>
+</body>
+</html>
