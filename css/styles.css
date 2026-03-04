@@ -271,3 +271,203 @@ main { max-width: 980px; margin: 0 auto; padding: 24px 18px 64px; }
   .contact-row { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
 }
+/* =========================
+   NAV: Alignment + Capsule Hover
+   ========================= */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 22px;
+  margin: 0 auto;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+
+  /* makes it look aligned with your page */
+  max-width: 1100px;
+  border-radius: 999px;
+  margin-top: 14px;
+}
+
+.nav-logo {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* capsule hover */
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  transform: translateY(-1px);
+}
+
+/* optional: "active" look when you click/hold */
+.nav-links a:active {
+  transform: translateY(0px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* theme toggle matches nav pills */
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(41, 151, 255, 0.55);
+  background: rgba(41, 151, 255, 0.12);
+}
+
+/* Mobile: keep it clean */
+@media (max-width: 720px) {
+  .nav {
+    height: 58px;
+    padding: 0 14px;
+    border-radius: 18px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  /* Hide extra links on very small screens (optional) */
+  .nav-links li:nth-child(n+4) {
+    display: none;
+  }
+}
+
+/* =========================
+   AESTHETICS: nicer background + section rhythm
+   ========================= */
+body {
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(41,151,255,0.10), transparent 55%),
+    radial-gradient(700px 500px at 80% 20%, rgba(120,80,255,0.10), transparent 60%),
+    var(--bg);
+}
+
+/* Slightly more premium separators */
+.section {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Better grid cards */
+.grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+
+/* Ensure images always fill card top nicely */
+.card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  background: rgba(255,255,255,0.03);
+}
+
+.card-body {
+  padding: 14px 16px 16px;
+}
+
+.card-body h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.card-body p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.92rem;
+}
+
+.card-links {
+  display: flex;
+  gap: 12px;
+}
+
+.card-links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.card-links a:hover {
+  text-decoration: underline;
+}
+
+/* Make hero a bit more premium */
+.hero {
+  padding-top: 92px;
+}
+
+.photo-card {
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+}
