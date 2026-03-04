@@ -11,8 +11,7 @@ const PROFILE = {
     {
     title: "Ecommerce Store",
     desc: "Full stack ecommerce store with login, product filtering and categorized product view.",
-    image: "assets/projects/Ecommerce Store/UI.png",
-    github: "https://mern-store-gold.vercel.app/",
+    image: "assets/projects/Ecommerce_store/UI.png",
     live: "https://mern-store-gold.vercel.app/"
     },
 
@@ -36,15 +35,13 @@ const PROFILE = {
 {
 title: "Cyber Safety in Bangladesh using Vernacular AI and Blockchain",
 desc: "Framework combining vernacular NLP and blockchain reporting to ensure a harassment-free digital space.",
-paper: "assets/papers/Transforming Cyber Safety in Bangladesh through Vernacular AI and Blockchain to Ensure a Harassment Free Space for Women and Children.pdf",
-repo: "#"
+paper: "assets/papers/Transforming Cyber Safety in Bangladesh through Vernacular AI and Blockchain to Ensure a Harassment Free Space for Women and Children.pdf"
 },
 
 {
 title: "Laser–Matter Interaction Studies for Precision Manufacturing",
 desc: "Study of laser interaction techniques for biomedical and precision manufacturing applications.",
-paper: "assets/papers/Laser–Matter Interaction Studies for Precision Manufacturing and Biomedical Applications in Bangladesh.pdf",
-repo: "#"
+paper: "assets/papers/Laser–Matter Interaction Studies for Precision Manufacturing and Biomedical Applications in Bangladesh.pdf"
 }
 
 ]
