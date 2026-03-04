@@ -21,21 +21,78 @@ if (themeToggle) {
   });
 }
 
-/* ---------- Small helper ---------- */
+/* ---------- Helpers ---------- */
 function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value ?? "";
 }
 
-/* ---------- Guard: PROFILE must exist ---------- */
+function safeLink(url) {
+  return typeof url === "string" && url.trim() !== "" && url !== "#";
+}
+
+/* ---------- Card Templates ---------- */
+function projectCardHTML(p) {
+  const img = p.image ? `<img src="${p.image}" alt="${p.title}">` : "";
+  const live = safeLink(p.live)
+    ? `<a href="${p.live}" target="_blank" rel="noreferrer">↗ Live</a>`
+    : "";
+  const gh = safeLink(p.github)
+    ? `<a href="${p.github}" target="_blank" rel="noreferrer">↗ GitHub</a>`
+    : "";
+
+  return `
+    <div class="card">
+      ${img}
+      <div class="card-body">
+        <h3>${p.title || ""}</h3>
+        <p>${p.desc || ""}</p>
+        <div class="card-links">${live}${gh}</div>
+      </div>
+    </div>
+  `;
+}
+
+function researchCardHTML(r) {
+  const paper = safeLink(r.paper)
+    ? `<a href="${r.paper}" target="_blank" rel="noreferrer">↗ Paper</a>`
+    : "";
+  const repo = safeLink(r.repo)
+    ? `<a href="${r.repo}" target="_blank" rel="noreferrer">↗ Repo</a>`
+    : "";
+
+  return `
+    <div class="card">
+      <div class="card-body">
+        <h3>${r.title || ""}</h3>
+        <p>${r.desc || ""}</p>
+        <div class="card-links">${paper}${repo}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderGrid(gridId, items, templateFn) {
+  const el = document.getElementById(gridId);
+  if (!el) return;
+  const arr = Array.isArray(items) ? items : [];
+  el.innerHTML = arr.map(templateFn).join("");
+
+  // Optional: show a small message if empty
+  if (arr.length === 0) {
+    el.innerHTML = `<p style="color: var(--muted);">Nothing added yet.</p>`;
+  }
+}
+
+/* ---------- PROFILE must exist ---------- */
 if (typeof PROFILE === "undefined") {
   console.error("PROFILE is not defined. Make sure data/profile.js loads before js/main.js");
 } else {
-  /* ---------- Page title + nav ---------- */
+  // Title + nav
   document.title = `${PROFILE.name} — Portfolio`;
   setText("navName", PROFILE.name);
 
-  /* ---------- HERO ---------- */
+  // Hero
   setText("heroName", PROFILE.name);
   setText("heroRole", PROFILE.role);
 
@@ -43,34 +100,31 @@ if (typeof PROFILE === "undefined") {
   if (heroPhoto) {
     heroPhoto.src = PROFILE.photoUrl || "";
     heroPhoto.alt = `${PROFILE.name} profile photo`;
-    // If no photo provided, hide image to avoid broken icon
     if (!PROFILE.photoUrl) heroPhoto.style.display = "none";
   }
 
-  /* ---------- ABOUT ---------- */
+  // About
   setText("aboutTitle", PROFILE.aboutTitle || "About Me");
   setText("aboutText", PROFILE.aboutText || "");
 
-  /* ---------- Social icon links ---------- */
+  // Projects + Research (THIS is what you’re missing)
+  renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
+  renderGrid("researchGrid", PROFILE.research, researchCardHTML);
+
+  // Social links
   const emailBtn = document.getElementById("emailBtn");
-  if (emailBtn && PROFILE.email) {
-    emailBtn.href = `mailto:${PROFILE.email}`;
-  }
+  if (emailBtn && PROFILE.email) emailBtn.href = `mailto:${PROFILE.email}`;
 
   const githubBtn = document.getElementById("githubBtn");
-  if (githubBtn && PROFILE.github) {
-    githubBtn.href = PROFILE.github;
-  }
+  if (githubBtn && PROFILE.github) githubBtn.href = PROFILE.github;
 
   const linkedinBtn = document.getElementById("linkedinBtn");
-  if (linkedinBtn && PROFILE.linkedin) {
-    linkedinBtn.href = PROFILE.linkedin;
-  }
+  if (linkedinBtn && PROFILE.linkedin) linkedinBtn.href = PROFILE.linkedin;
 
-  /* ---------- Footer ---------- */
+  // Footer
   setText("footerCopy", `© 2026 ${PROFILE.name}`);
 
-  /* ---------- Contact Form (mailto) ---------- */
+  // Contact form (mailto)
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
@@ -81,22 +135,12 @@ if (typeof PROFILE === "undefined") {
       const subject = document.getElementById("cSubject")?.value.trim() || "";
       const message = document.getElementById("cMessage")?.value.trim() || "";
 
-      // Basic validation
-      if (!PROFILE.email) {
-        alert("Receiver email is missing in PROFILE.email");
-        return;
-      }
-      if (!name || !email || !subject || !message) {
-        alert("Please fill all fields.");
-        return;
-      }
+      if (!PROFILE.email) return alert("Receiver email is missing in PROFILE.email");
+      if (!name || !email || !subject || !message) return alert("Please fill all fields.");
 
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\n${message}`
-      );
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
       const subj = encodeURIComponent(subject);
 
-      // Opens user's email app (works on GitHub Pages)
       window.location.href = `mailto:${PROFILE.email}?subject=${subj}&body=${body}`;
     });
   }
