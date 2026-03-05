@@ -2,12 +2,12 @@
    main.js — Portfolio Logic
    ========================= */
 
-/* ---------- Theme ---------- */
-// Smooth entrance after first paint
+/* ---------- Smooth entrance ---------- */
 window.addEventListener("load", () => {
   document.body.classList.remove("preload");
 });
 
+/* ---------- Theme ---------- */
 const html = document.documentElement;
 const themeToggle = document.getElementById("themeToggle");
 
@@ -16,7 +16,6 @@ function applyTheme(theme) {
   if (themeToggle) themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
   localStorage.setItem("theme", theme);
 }
-
 applyTheme(localStorage.getItem("theme") || "dark");
 
 if (themeToggle) {
@@ -47,21 +46,19 @@ if (cursorGlow) {
 
   window.addEventListener("mousemove", updateGlow, { passive: true });
 
-  // If mouse leaves the window, fade out
-  window.addEventListener("mouseleave", () => {
-    cursorGlow.style.opacity = "0";
-  });
-
-  window.addEventListener("mouseenter", () => {
-    cursorGlow.style.opacity = "1";
-  });
+  window.addEventListener("mouseleave", () => (cursorGlow.style.opacity = "0"));
+  window.addEventListener("mouseenter", () => (cursorGlow.style.opacity = "1"));
 }
 
 /* ---------- Cards ---------- */
 function projectCardHTML(p) {
   const img = p.image ? `<img src="${p.image}" alt="${p.title}">` : "";
-  const live = safeLink(p.live) ? `<a href="${p.live}" target="_blank" rel="noreferrer">↗ Live</a>` : "";
-  const gh = safeLink(p.github) ? `<a href="${p.github}" target="_blank" rel="noreferrer">↗ GitHub</a>` : "";
+  const live = safeLink(p.live)
+    ? `<a href="${p.live}" target="_blank" rel="noreferrer">↗ Live</a>`
+    : "";
+  const gh = safeLink(p.github)
+    ? `<a href="${p.github}" target="_blank" rel="noreferrer">↗ GitHub</a>`
+    : "";
 
   return `
     <div class="card">
@@ -76,8 +73,12 @@ function projectCardHTML(p) {
 }
 
 function researchCardHTML(r) {
-  const paper = safeLink(r.paper) ? `<a href="${r.paper}" target="_blank" rel="noreferrer">↗ Paper</a>` : "";
-  const repo = safeLink(r.repo) ? `<a href="${r.repo}" target="_blank" rel="noreferrer">↗ Repo</a>` : "";
+  const paper = safeLink(r.paper)
+    ? `<a href="${r.paper}" target="_blank" rel="noreferrer">↗ Paper</a>`
+    : "";
+  const repo = safeLink(r.repo)
+    ? `<a href="${r.repo}" target="_blank" rel="noreferrer">↗ Repo</a>`
+    : "";
 
   return `
     <div class="card">
@@ -97,42 +98,24 @@ function renderGrid(id, items, renderer) {
   el.innerHTML = arr.map(renderer).join("");
 }
 
-
-/* ---------- Fill content ---------- */
-if (typeof PROFILE === "undefined") {
-  console.error("PROFILE not found. Ensure data/profile.js loads before js/main.js");
-} else {
-  document.title = `${PROFILE.name} — Portfolio`;
-
-  setText("navName", PROFILE.name);
-  setText("heroName", PROFILE.name);
-  setText("heroRole", PROFILE.role);
-  setText("aboutTitle", PROFILE.aboutTitle || "About Me");
-  setText("aboutText", PROFILE.aboutText || "");
-  setText("footerCopy", `© ${PROFILE.name}`);
-
-  // CV link (optional)
-  const cvBtn = document.getElementById("cvBtn");
-  if (cvBtn && PROFILE.cvUrl) cvBtn.href = PROFILE.cvUrl;
-
-  // Photo
-  const heroPhoto = document.getElementById("heroPhoto");
-  if (heroPhoto && PROFILE.photoUrl) {
-    heroPhoto.src = PROFILE.photoUrl;
-    heroPhoto.alt = `${PROFILE.name} profile photo`;
-  }
-
-  // Render
-  renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
-  renderGrid("researchGrid", PROFILE.research, researchCardHTML);
-  renderSkills();
-  function renderSkills() {
+/* ---------- Skills (chips + click details) ---------- */
+function renderSkills() {
   const grid = document.getElementById("skillsGrid");
   const details = document.getElementById("skillDetails");
-  if (!grid || !details || !window.PROFILE) return;
+  if (!grid || !details) return;
 
-  const skills = PROFILE.skills || [];
+  const skills = (window.PROFILE && Array.isArray(PROFILE.skills)) ? PROFILE.skills : [];
   grid.innerHTML = "";
+
+  if (skills.length === 0) {
+    details.innerHTML = `
+      <div class="skill-details-title">No skills found.</div>
+      <div class="skill-details-body">
+        Add a <b>skills: []</b> section in <b>data/profile.js</b>.
+      </div>
+    `;
+    return;
+  }
 
   const setDetails = (skill) => {
     const whereList = (skill.where || []).map(x => `<li>${x}</li>`).join("");
@@ -151,12 +134,6 @@ if (typeof PROFILE === "undefined") {
     `;
   };
 
-  // Default (nothing selected)
-  details.innerHTML = `
-    <div class="skill-details-title">Click a skill to see how I used it.</div>
-    <div class="skill-details-body">Projects, coursework, or research where I implemented it will appear here.</div>
-  `;
-
   skills.forEach((skill, idx) => {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -165,13 +142,11 @@ if (typeof PROFILE === "undefined") {
     btn.setAttribute("aria-pressed", "false");
 
     btn.addEventListener("click", () => {
-      // remove active from all
       [...grid.querySelectorAll(".skill-chip")].forEach(b => {
         b.classList.remove("active");
         b.setAttribute("aria-pressed", "false");
       });
 
-      // set active
       btn.classList.add("active");
       btn.setAttribute("aria-pressed", "true");
       setDetails(skill);
@@ -179,7 +154,7 @@ if (typeof PROFILE === "undefined") {
 
     grid.appendChild(btn);
 
-    // Optional: auto-select first skill
+    // Auto select first skill
     if (idx === 0) {
       btn.classList.add("active");
       btn.setAttribute("aria-pressed", "true");
@@ -187,6 +162,37 @@ if (typeof PROFILE === "undefined") {
     }
   });
 }
+
+/* ---------- Fill content ---------- */
+if (typeof PROFILE === "undefined") {
+  console.error("PROFILE not found. Ensure data/profile.js loads before js/main.js");
+} else {
+  document.title = `${PROFILE.name} — Portfolio`;
+
+  setText("navName", PROFILE.name);
+  setText("heroName", PROFILE.name);
+  setText("heroRole", PROFILE.role);
+
+  setText("aboutTitle", PROFILE.aboutTitle || "About Me");
+  setText("aboutText", PROFILE.aboutText || "");
+
+  setText("footerCopy", `© ${PROFILE.name}`);
+
+  // CV link (optional)
+  const cvBtn = document.getElementById("cvBtn");
+  if (cvBtn && PROFILE.cvUrl) cvBtn.href = PROFILE.cvUrl;
+
+  // Photo
+  const heroPhoto = document.getElementById("heroPhoto");
+  if (heroPhoto && PROFILE.photoUrl) {
+    heroPhoto.src = PROFILE.photoUrl;
+    heroPhoto.alt = `${PROFILE.name} profile photo`;
+  }
+
+  // Render sections
+  renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
+  renderGrid("researchGrid", PROFILE.research, researchCardHTML);
+  renderSkills();
 
   // Footer icon links
   const fGithub = document.getElementById("fGithub");
