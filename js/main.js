@@ -125,6 +125,7 @@ if (typeof PROFILE === "undefined") {
   // Render
   renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
   renderGrid("researchGrid", PROFILE.research, researchCardHTML);
+  renderSkills();
   function renderSkills() {
   const grid = document.getElementById("skillsGrid");
   const details = document.getElementById("skillDetails");
