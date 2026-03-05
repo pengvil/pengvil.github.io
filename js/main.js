@@ -3,6 +3,11 @@
    ========================= */
 
 /* ---------- Theme ---------- */
+// Smooth entrance after first paint
+window.addEventListener("load", () => {
+  document.body.classList.remove("preload");
+});
+
 const html = document.documentElement;
 const themeToggle = document.getElementById("themeToggle");
 
