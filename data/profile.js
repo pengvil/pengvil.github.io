@@ -1,6 +1,6 @@
 const PROFILE = {
   name: "Md. Zahidul Islam Navil",
-  role: "Full Stack Software Developer",
+  role: "Software Developer",
   photoUrl: "assets/profile/navil_main.png",
 
   cvUrl: "CV.pdf",
@@ -9,7 +9,7 @@ const PROFILE = {
   aboutText:
     "I’m a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.",
 
-  email: "zahidul.islam.navil@gmail.com",
+  email: "zinavilofficial@gmail.com",
   github: "https://github.com/pengvil",
   linkedin: "https://www.linkedin.com/in/md-zahidul-islam-navil/",
 
