@@ -13,6 +13,48 @@ const PROFILE = {
   github: "https://github.com/pengvil",
   linkedin: "https://www.linkedin.com/in/md-zahidul-islam-navil/",
 
+  skills: [
+    {
+      name: "Java",
+      where: ["Library Management System", "Data Structures coursework"],
+      how: "Implemented OOP concepts (classes, encapsulation), file/data handling, and CRUD-style flows for managing books and borrowers."
+    },
+    {
+      name: "JavaScript",
+      where: ["Portfolio website", "Ecommerce Store UI"],
+      how: "Used DOM manipulation, dynamic rendering (cards/sections), theme toggle, and event handling for interactive UI."
+    },
+    {
+      name: "React",
+      where: ["Ecommerce Store"],
+      how: "Built reusable components, handled state for product filtering, and created responsive UI views."
+    },
+    {
+      name: "Node.js",
+      where: ["Ecommerce Store"],
+      how: "Worked with backend APIs and request/response flow; connected frontend to server endpoints."
+    },
+    {
+      name: "Python",
+      where: ["AI/ML exploration", "Automation scripts"],
+      how: "Used Python for scripting and experimenting with data/ML workflows (future: add specific notebooks/projects)."
+    },
+    {
+      name: "AI / NLP",
+      where: ["Research paper: Cyber Safety in Bangladesh"],
+      how: "Explored vernacular NLP idea for detecting/reporting harmful content in Bangla, with a framework design approach."
+    },
+    {
+      name: "Robotics",
+      where: ["Line Following Robot"],
+      how: "Worked with IR sensors and PID motor control logic for stable line tracking; handled calibration and tuning."
+    },
+    {
+      name: "Git & GitHub",
+      where: ["All projects", "Hosting this portfolio"],
+      how: "Used version control (commit/push), managed repository structure, and deployed using GitHub Pages."
+    }
+  ],
   projects: [
     {
       title: "Ecommerce Store",

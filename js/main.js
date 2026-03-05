@@ -97,6 +97,7 @@ function renderGrid(id, items, renderer) {
   el.innerHTML = arr.map(renderer).join("");
 }
 
+
 /* ---------- Fill content ---------- */
 if (typeof PROFILE === "undefined") {
   console.error("PROFILE not found. Ensure data/profile.js loads before js/main.js");
@@ -124,6 +125,67 @@ if (typeof PROFILE === "undefined") {
   // Render
   renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
   renderGrid("researchGrid", PROFILE.research, researchCardHTML);
+  function renderSkills() {
+  const grid = document.getElementById("skillsGrid");
+  const details = document.getElementById("skillDetails");
+  if (!grid || !details || !window.PROFILE) return;
+
+  const skills = PROFILE.skills || [];
+  grid.innerHTML = "";
+
+  const setDetails = (skill) => {
+    const whereList = (skill.where || []).map(x => `<li>${x}</li>`).join("");
+    details.innerHTML = `
+      <div class="skill-details-title">${skill.name}</div>
+      <div class="skill-details-body">
+        <div class="skill-meta">
+          <div class="skill-meta-label">Where I used it</div>
+          <ul class="skill-where">${whereList}</ul>
+        </div>
+        <div class="skill-meta">
+          <div class="skill-meta-label">How I implemented it</div>
+          <p class="skill-how">${skill.how || ""}</p>
+        </div>
+      </div>
+    `;
+  };
+
+  // Default (nothing selected)
+  details.innerHTML = `
+    <div class="skill-details-title">Click a skill to see how I used it.</div>
+    <div class="skill-details-body">Projects, coursework, or research where I implemented it will appear here.</div>
+  `;
+
+  skills.forEach((skill, idx) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "skill-chip";
+    btn.textContent = skill.name;
+    btn.setAttribute("aria-pressed", "false");
+
+    btn.addEventListener("click", () => {
+      // remove active from all
+      [...grid.querySelectorAll(".skill-chip")].forEach(b => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
+
+      // set active
+      btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
+      setDetails(skill);
+    });
+
+    grid.appendChild(btn);
+
+    // Optional: auto-select first skill
+    if (idx === 0) {
+      btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
+      setDetails(skill);
+    }
+  });
+}
 
   // Footer icon links
   const fGithub = document.getElementById("fGithub");

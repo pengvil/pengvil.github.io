@@ -517,3 +517,89 @@ body{
 @media (hover: none) {
   .cursor-glow { display: none; }
 }
+
+/* =========================
+   About Skills: chips + details panel
+   ========================= */
+.about-skills{
+  margin-top: 22px;
+}
+
+.skills-title{
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.skills-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.skill-chip{
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s, border-color 0.2s;
+}
+
+.skill-chip:hover{
+  transform: translateY(-1px);
+  background: var(--card2);
+  border-color: rgba(41,151,255,0.35);
+}
+
+.skill-chip.active{
+  background: var(--accent2);
+  border-color: rgba(41,151,255,0.7);
+}
+
+.skill-details{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+
+.skill-details-title{
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.skill-details-body{
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+.skill-meta{
+  margin-top: 10px;
+}
+
+.skill-meta-label{
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.skill-where{
+  padding-left: 18px;
+  margin: 0;
+}
+
+.skill-how{
+  margin: 0;
+}
