@@ -3,51 +3,51 @@ const PROFILE = {
   role: "Full Stack Software Developer",
   photoUrl: "assets/profile/navil_main.png",
 
-    aboutTitle: "About Me",
+  cvUrl: "CV.pdf",
+
+  aboutTitle: "About Me",
   aboutText:
     "I’m a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.",
 
-  email: "zinavilofficial@gmail.com",
+  email: "zahidul.islam.navil@gmail.com",
   github: "https://github.com/pengvil",
   linkedin: "https://www.linkedin.com/in/md-zahidul-islam-navil/",
 
   projects: [
-
     {
-    title: "E-commerce Store",
-    desc: "Full stack ecommerce store with login, product filtering and categorized product view.",
-    image: "assets/projects/Ecommerce_Store/UI.png",
-    live: "https://mern-store-gold.vercel.app/"
+      title: "Ecommerce Store",
+      desc: "Full stack ecommerce store with login, product filtering and categorized product view.",
+      image: "assets/projects/Ecommerce_Store/UI.png",
+      live: "https://mern-store-gold.vercel.app/",
+      github: "https://mern-store-gold.vercel.app/"
     },
-
     {
-    title: "Library Management System",
-    desc: "Java based system for managing books, borrowers and return dates with structured storage.",
-    image: "assets/projects/Library_Management_System/UI.png",
-    github: "https://github.com/pengvil/Library-Management-System"
+      title: "Library Management System",
+      desc: "Java based system for managing books, borrowers and return dates with structured storage.",
+      image: "assets/projects/Library_Management_System/UI.png",
+      github: "https://github.com/pengvil/Library-Management-System"
     },
-
     {
-    title: "Line Following Robot",
-    desc: "Autonomous robot using IR sensors and PID motor control for accurate line tracking.",
-    image: "assets/projects/Line_Follower_Robot/The_Bot.png"
+      title: "Line Following Robot",
+      desc: "Autonomous robot using IR sensors and PID motor control for accurate line tracking.",
+      image: "assets/projects/Line_Follower_Robot/The_Bot.png"
     }
-
   ],
 
   research: [
-
-{
-title: "Cyber Safety in Bangladesh using Vernacular AI and Blockchain",
-desc: "Framework combining vernacular NLP and blockchain reporting to ensure a harassment-free digital space.",
-paper: "assets/papers/Transforming Cyber Safety in Bangladesh through Vernacular AI and Blockchain to Ensure a Harassment Free Space for Women and Children.pdf"
-},
-
-{
-title: "Laser–Matter Interaction Studies for Precision Manufacturing",
-desc: "Study of laser interaction techniques for biomedical and precision manufacturing applications.",
-paper: "assets/papers/Laser–Matter Interaction Studies for Precision Manufacturing and Biomedical Applications in Bangladesh.pdf"
-}
-
-]
+    {
+      title: "Cyber Safety in Bangladesh using Vernacular AI and Blockchain",
+      desc: "Framework combining vernacular NLP and blockchain reporting to ensure a harassment-free digital space.",
+      paper:
+        "assets/papers/Transforming Cyber Safety in Bangladesh through Vernacular AI and Blockchain to Ensure a Harassment Free Space for Women and Children.pdf",
+      repo: "#"
+    },
+    {
+      title: "Laser–Matter Interaction Studies for Precision Manufacturing",
+      desc: "Study of laser interaction techniques for biomedical and precision manufacturing applications.",
+      paper:
+        "assets/papers/Laser–Matter Interaction Studies for Precision Manufacturing and Biomedical Applications in Bangladesh.pdf",
+      repo: "#"
+    }
+  ]
 };
