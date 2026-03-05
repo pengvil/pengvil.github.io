@@ -1,190 +1,142 @@
 /* =========================
-   main.js (FULL)
+   main.js — Portfolio Logic
    ========================= */
 
-/* ---------- Smooth entrance ---------- */
+/* ---------- Theme ---------- */
+// Smooth entrance after first paint
 window.addEventListener("load", () => {
-  // If you use body.preload in HTML, remove it on load:
   document.body.classList.remove("preload");
-  document.body.classList.add("loaded");
 });
 
-/* ---------- Theme toggle ---------- */
-(function themeInit() {
-  const html = document.documentElement;
-  const btn = document.getElementById("themeToggle");
-  if (!btn) return;
+const html = document.documentElement;
+const themeToggle = document.getElementById("themeToggle");
 
-  const saved = localStorage.getItem("theme") || html.getAttribute("data-theme") || "dark";
+function applyTheme(theme) {
+  html.setAttribute("data-theme", theme);
+  if (themeToggle) themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+  localStorage.setItem("theme", theme);
+}
 
-  const applyTheme = (t) => {
-    html.setAttribute("data-theme", t);
-    btn.textContent = t === "dark" ? "☀️" : "🌙";
-    localStorage.setItem("theme", t);
-  };
+applyTheme(localStorage.getItem("theme") || "dark");
 
-  applyTheme(saved);
-
-  btn.addEventListener("click", () => {
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
     const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
     applyTheme(next);
   });
-})();
+}
+
+/* ---------- Helpers ---------- */
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value ?? "";
+}
+
+function safeLink(url) {
+  return typeof url === "string" && url.trim() !== "" && url !== "#";
+}
 
 /* ---------- Cursor glow spotlight ---------- */
-(function cursorGlowInit() {
-  const cursorGlow = document.getElementById("cursorGlow");
-  if (!cursorGlow) return;
+const cursorGlow = document.getElementById("cursorGlow");
 
-  const update = (e) => {
+if (cursorGlow) {
+  const updateGlow = (e) => {
     cursorGlow.style.setProperty("--mx", `${e.clientX}px`);
     cursorGlow.style.setProperty("--my", `${e.clientY}px`);
   };
 
-  window.addEventListener("mousemove", update, { passive: true });
-  window.addEventListener("mouseleave", () => (cursorGlow.style.opacity = "0"));
-  window.addEventListener("mouseenter", () => (cursorGlow.style.opacity = "1"));
-})();
+  window.addEventListener("mousemove", updateGlow, { passive: true });
 
-/* ---------- Helpers ---------- */
-function $(id) {
-  return document.getElementById(id);
-}
+  // If mouse leaves the window, fade out
+  window.addEventListener("mouseleave", () => {
+    cursorGlow.style.opacity = "0";
+  });
 
-function safeLink(url) {
-  return typeof url === "string" && url.trim() && url.trim() !== "#" ? url.trim() : "";
-}
-
-function esc(str) {
-  return String(str || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-/* ---------- Render hero + basic text ---------- */
-function renderProfileHeader() {
-  if (!window.PROFILE) return;
-
-  const { name, role } = PROFILE;
-
-  const pageTitle = $("pageTitle");
-  if (pageTitle) pageTitle.textContent = `${name} — Portfolio`;
-
-  const navName = $("navName");
-  if (navName) navName.textContent = name;
-
-  const heroName = $("heroName");
-  if (heroName) heroName.textContent = name;
-
-  const heroRole = $("heroRole");
-  if (heroRole) heroRole.textContent = role;
-
-  const footerCopy = $("footerCopy");
-  if (footerCopy) footerCopy.textContent = `© ${new Date().getFullYear()} ${name}`;
-}
-
-/* ---------- About text ---------- */
-function renderAbout() {
-  if (!window.PROFILE) return;
-
-  const aboutText = $("aboutText");
-  if (!aboutText) return;
-
-  // If you already store about text in profile.js, use it.
-  // Otherwise fallback:
-  aboutText.textContent =
-    PROFILE.about ||
-    "I’m a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.";
-}
-
-/* ---------- Projects ---------- */
-function renderProjects() {
-  if (!window.PROFILE) return;
-
-  const grid = $("projectsGrid");
-  if (!grid) return;
-
-  grid.innerHTML = "";
-  (PROFILE.projects || []).forEach((p) => {
-    const live = safeLink(p.live);
-    const github = safeLink(p.github);
-
-    const links = `
-      <div class="card-links">
-        ${live ? `<a href="${esc(live)}" target="_blank" rel="noreferrer">↗ Live</a>` : ""}
-        ${github ? `<a href="${esc(github)}" target="_blank" rel="noreferrer">↗ GitHub</a>` : ""}
-      </div>
-    `;
-
-    grid.insertAdjacentHTML(
-      "beforeend",
-      `
-      <article class="card">
-        <img src="${esc(p.image)}" alt="${esc(p.title)} thumbnail"
-             onerror="this.style.display='none'; this.closest('.card').classList.add('noimg');" />
-        <div class="card-body">
-          <h3>${esc(p.title)}</h3>
-          <p>${esc(p.desc)}</p>
-          ${links}
-        </div>
-      </article>
-      `
-    );
+  window.addEventListener("mouseenter", () => {
+    cursorGlow.style.opacity = "1";
   });
 }
 
-/* ---------- Research ---------- */
-function renderResearch() {
-  if (!window.PROFILE) return;
+/* ---------- Cards ---------- */
+function projectCardHTML(p) {
+  const img = p.image ? `<img src="${p.image}" alt="${p.title}">` : "";
+  const live = safeLink(p.live) ? `<a href="${p.live}" target="_blank" rel="noreferrer">↗ Live</a>` : "";
+  const gh = safeLink(p.github) ? `<a href="${p.github}" target="_blank" rel="noreferrer">↗ GitHub</a>` : "";
 
-  const grid = $("researchGrid");
-  if (!grid) return;
-
-  grid.innerHTML = "";
-  (PROFILE.research || []).forEach((r) => {
-    const paper = safeLink(r.paper);
-    const repo = safeLink(r.repo);
-
-    const links = `
-      <div class="card-links">
-        ${paper ? `<a href="${esc(paper)}" target="_blank" rel="noreferrer">↗ Paper</a>` : ""}
-        ${repo ? `<a href="${esc(repo)}" target="_blank" rel="noreferrer">↗ Repo</a>` : ""}
+  return `
+    <div class="card">
+      ${img}
+      <div class="card-body">
+        <h3>${p.title || ""}</h3>
+        <p>${p.desc || ""}</p>
+        <div class="card-links">${live}${gh}</div>
       </div>
-    `;
-
-    grid.insertAdjacentHTML(
-      "beforeend",
-      `
-      <article class="card">
-        <div class="card-body">
-          <h3>${esc(r.title)}</h3>
-          <p>${esc(r.desc)}</p>
-          ${links}
-        </div>
-      </article>
-      `
-    );
-  });
+    </div>
+  `;
 }
 
-/* ---------- Skills (chips + click details) ---------- */
-function renderSkills() {
-  if (!window.PROFILE) return;
+function researchCardHTML(r) {
+  const paper = safeLink(r.paper) ? `<a href="${r.paper}" target="_blank" rel="noreferrer">↗ Paper</a>` : "";
+  const repo = safeLink(r.repo) ? `<a href="${r.repo}" target="_blank" rel="noreferrer">↗ Repo</a>` : "";
 
-  const grid = $("skillsGrid");
-  const details = $("skillDetails");
-  if (!grid || !details) return;
+  return `
+    <div class="card">
+      <div class="card-body">
+        <h3>${r.title || ""}</h3>
+        <p>${r.desc || ""}</p>
+        <div class="card-links">${paper}${repo}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderGrid(id, items, renderer) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const arr = Array.isArray(items) ? items : [];
+  el.innerHTML = arr.map(renderer).join("");
+}
+
+
+/* ---------- Fill content ---------- */
+if (typeof PROFILE === "undefined") {
+  console.error("PROFILE not found. Ensure data/profile.js loads before js/main.js");
+} else {
+  document.title = `${PROFILE.name} — Portfolio`;
+
+  setText("navName", PROFILE.name);
+  setText("heroName", PROFILE.name);
+  setText("heroRole", PROFILE.role);
+  setText("aboutTitle", PROFILE.aboutTitle || "About Me");
+  setText("aboutText", PROFILE.aboutText || "");
+  setText("footerCopy", `© ${PROFILE.name}`);
+
+  // CV link (optional)
+  const cvBtn = document.getElementById("cvBtn");
+  if (cvBtn && PROFILE.cvUrl) cvBtn.href = PROFILE.cvUrl;
+
+  // Photo
+  const heroPhoto = document.getElementById("heroPhoto");
+  if (heroPhoto && PROFILE.photoUrl) {
+    heroPhoto.src = PROFILE.photoUrl;
+    heroPhoto.alt = `${PROFILE.name} profile photo`;
+  }
+
+  // Render
+  renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
+  renderGrid("researchGrid", PROFILE.research, researchCardHTML);
+  function renderSkills() {
+  const grid = document.getElementById("skillsGrid");
+  const details = document.getElementById("skillDetails");
+  if (!grid || !details || !window.PROFILE) return;
 
   const skills = PROFILE.skills || [];
   grid.innerHTML = "";
 
   const setDetails = (skill) => {
-    const whereList = (skill.where || []).map((x) => `<li>${esc(x)}</li>`).join("");
+    const whereList = (skill.where || []).map(x => `<li>${x}</li>`).join("");
     details.innerHTML = `
-      <div class="skill-details-title">${esc(skill.name)}</div>
+      <div class="skill-details-title">${skill.name}</div>
       <div class="skill-details-body">
         <div class="skill-meta">
           <div class="skill-meta-label">Where I used it</div>
@@ -192,21 +144,18 @@ function renderSkills() {
         </div>
         <div class="skill-meta">
           <div class="skill-meta-label">How I implemented it</div>
-          <p class="skill-how">${esc(skill.how || "")}</p>
+          <p class="skill-how">${skill.how || ""}</p>
         </div>
       </div>
     `;
   };
 
-  if (!skills.length) {
-    details.innerHTML = `
-      <div class="skill-details-title">No skills found.</div>
-      <div class="skill-details-body">Add a <code>skills: []</code> section in <code>data/profile.js</code>.</div>
-    `;
-    return;
-  }
+  // Default (nothing selected)
+  details.innerHTML = `
+    <div class="skill-details-title">Click a skill to see how I used it.</div>
+    <div class="skill-details-body">Projects, coursework, or research where I implemented it will appear here.</div>
+  `;
 
-  // Build chips
   skills.forEach((skill, idx) => {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -215,11 +164,13 @@ function renderSkills() {
     btn.setAttribute("aria-pressed", "false");
 
     btn.addEventListener("click", () => {
-      [...grid.querySelectorAll(".skill-chip")].forEach((b) => {
+      // remove active from all
+      [...grid.querySelectorAll(".skill-chip")].forEach(b => {
         b.classList.remove("active");
         b.setAttribute("aria-pressed", "false");
       });
 
+      // set active
       btn.classList.add("active");
       btn.setAttribute("aria-pressed", "true");
       setDetails(skill);
@@ -227,7 +178,7 @@ function renderSkills() {
 
     grid.appendChild(btn);
 
-    // auto select first
+    // Optional: auto-select first skill
     if (idx === 0) {
       btn.classList.add("active");
       btn.setAttribute("aria-pressed", "true");
@@ -236,50 +187,36 @@ function renderSkills() {
   });
 }
 
-/* ---------- Contact icons + form (mailto) ---------- */
-function wireContact() {
-  if (!window.PROFILE) return;
+  // Footer icon links
+  const fGithub = document.getElementById("fGithub");
+  if (fGithub && PROFILE.github) fGithub.href = PROFILE.github;
 
-  const emailBtn = $("emailBtn");
-  const githubBtn = $("githubBtn");
-  const linkedinBtn = $("linkedinBtn");
+  const fLinkedin = document.getElementById("fLinkedin");
+  if (fLinkedin && PROFILE.linkedin) fLinkedin.href = PROFILE.linkedin;
 
-  if (emailBtn) emailBtn.href = `mailto:${PROFILE.email || ""}`;
-  if (githubBtn) githubBtn.href = PROFILE.github || "#";
-  if (linkedinBtn) linkedinBtn.href = PROFILE.linkedin || "#";
+  const fEmail = document.getElementById("fEmail");
+  if (fEmail && PROFILE.email) fEmail.href = `mailto:${PROFILE.email}`;
 
-  const form = $("contactForm");
-  if (!form) return;
+  // Contact mailto form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+      const name = document.getElementById("cName").value.trim();
+      const email = document.getElementById("cEmail").value.trim();
+      const subject = document.getElementById("cSubject").value.trim();
+      const message = document.getElementById("cMessage").value.trim();
 
-    const name = $("cName")?.value?.trim() || "";
-    const email = $("cEmail")?.value?.trim() || "";
-    const subject = $("cSubject")?.value?.trim() || "";
-    const message = $("cMessage")?.value?.trim() || "";
+      if (!name || !email || !subject || !message) {
+        alert("Please fill all fields.");
+        return;
+      }
 
-    const to = PROFILE.email || "";
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      const subj = encodeURIComponent(subject);
 
-    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-  });
-}
-
-/* ---------- Init ---------- */
-function init() {
-  if (!window.PROFILE) {
-    console.error("PROFILE not found. Check that data/profile.js loads before main.js");
-    return;
+      window.location.href = `mailto:${PROFILE.email}?subject=${subj}&body=${body}`;
+    });
   }
-
-  renderProfileHeader();
-  renderAbout();
-  renderProjects();
-  renderResearch();
-  renderSkills();
-  wireContact();
 }
-
-document.addEventListener("DOMContentLoaded", init);
