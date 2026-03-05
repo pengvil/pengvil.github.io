@@ -93,3 +93,5 @@ const PROFILE = {
     }
   ]
 };
+
+window.PROFILE = PROFILE;
