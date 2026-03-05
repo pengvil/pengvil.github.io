@@ -456,3 +456,56 @@ body{
 .reveal.d3 { transition-delay: 240ms; }
 .reveal.d4 { transition-delay: 320ms; }
 .reveal.d5 { transition-delay: 400ms; }
+
+/* =========================
+   Cursor glow dotted spotlight
+   ========================= */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* behind your content */
+  opacity: 1;
+  transition: opacity 200ms ease;
+
+  /* Dotted layer */
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.16) 1px, transparent 1.6px);
+  background-size: 18px 18px;
+
+  /* Default hidden until JS sets --mx/--my */
+  -webkit-mask-image: radial-gradient(
+    circle 160px at var(--mx, -999px) var(--my, -999px),
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0.85) 40%,
+    rgba(0,0,0,0.0) 70%
+  );
+  mask-image: radial-gradient(
+    circle 160px at var(--mx, -999px) var(--my, -999px),
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0.85) 40%,
+    rgba(0,0,0,0.0) 70%
+  );
+
+  /* Little tint so it feels "lit" */
+  mix-blend-mode: screen;
+  filter: blur(0.2px);
+}
+
+/* Light theme: darker dots so they still show */
+[data-theme="light"] .cursor-glow {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.14) 1px, transparent 1.6px);
+  mix-blend-mode: multiply;
+}
+
+/* Make sure your site content stays above the glow */
+.nav, .page {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: disable effect for touch devices */
+@media (hover: none) {
+  .cursor-glow { display: none; }
+}

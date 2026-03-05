@@ -36,6 +36,27 @@ function safeLink(url) {
   return typeof url === "string" && url.trim() !== "" && url !== "#";
 }
 
+/* ---------- Cursor glow spotlight ---------- */
+const cursorGlow = document.getElementById("cursorGlow");
+
+if (cursorGlow) {
+  const updateGlow = (e) => {
+    cursorGlow.style.setProperty("--mx", `${e.clientX}px`);
+    cursorGlow.style.setProperty("--my", `${e.clientY}px`);
+  };
+
+  window.addEventListener("mousemove", updateGlow, { passive: true });
+
+  // If mouse leaves the window, fade out
+  window.addEventListener("mouseleave", () => {
+    cursorGlow.style.opacity = "0";
+  });
+
+  window.addEventListener("mouseenter", () => {
+    cursorGlow.style.opacity = "1";
+  });
+}
+
 /* ---------- Cards ---------- */
 function projectCardHTML(p) {
   const img = p.image ? `<img src="${p.image}" alt="${p.title}">` : "";
