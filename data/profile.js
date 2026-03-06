@@ -15,31 +15,35 @@ const PROFILE = {
 
   experience: [
     {
-      title: "Self-Directed Learning — YouTube & Online Resources",
-      type: "Learning",
-      period: "2022 — Present",
-      desc: "Continuously learning through YouTube channels and online tutorials covering web development, algorithms, AI/ML concepts, and system design. Key channels include Traversy Media, Fireship, and CS Dojo.",
-      tags: ["Web Dev", "AI/ML", "Algorithms"]
+      title: "Course Instructor — AIUB Course Solution (ACS)",
+      type: "Teaching",
+      period: "2024 — Present",
+      desc: "Creating and publishing lecture series for AIUB Course Solution (ACS) — the largest student community platform at AIUB. Produced a 13-video OOP1 (Java) playlist for 4th semester students and a 10-video Data Structure Final Term series. Currently producing the Algorithm course. All lectures are freely available on YouTube.",
+      links: [
+        { label: "OOP1 Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOOBGDp_w7Gwh5_1Qik2Kzm9" },
+        { label: "Data Structure Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOO_O_XK8Qj8lClldwQ66H-J" }
+      ],
+      tags: ["Java", "OOP", "Data Structures", "Algorithms", "YouTube"]
     },
     {
-      title: "BSc in Computer Science & Engineering",
+      title: "BSc in Computer Science & Engineering — AIUB",
       type: "Education",
       period: "2022 — Present",
-      desc: "Studying at American International University-Bangladesh (AIUB). Coursework covers data structures, OOP, computer networks, and software engineering. Active in project-based learning and research.",
-      tags: ["AIUB", "CSE", "Research"]
+      desc: "Currently in 6th semester at American International University-Bangladesh (AIUB). Coursework spans OOP, Data Structures, Algorithms, computer networks, and software engineering. Active in research and independent project development alongside studies.",
+      tags: ["AIUB", "CSE", "6th Semester"]
     },
     {
       title: "Independent Research Contributor",
       type: "Research",
       period: "2023 — Present",
-      desc: "Co-authored two research papers on vernacular AI for cyber safety in Bangladesh and laser-matter interaction studies for precision manufacturing. Both papers explore applied technology for real-world impact.",
+      desc: "Co-authored two research papers — one on vernacular AI and blockchain for cyber safety in Bangladesh, and another on laser-matter interaction for precision manufacturing. Both explore applied technology solving real-world problems.",
       tags: ["NLP", "Blockchain", "Laser Tech"]
     },
     {
-      title: "Open Source & Personal Projects",
+      title: "Independent Developer",
       type: "Projects",
       period: "2023 — Present",
-      desc: "Built and deployed full-stack and hardware projects independently — including an ecommerce platform (MERN), a Java library management system, and a PID-controlled line-following robot.",
+      desc: "Built and deployed projects independently — a full-stack MERN ecommerce platform, a Java-based library management system, and a PID-controlled line-following robot. Each project was built from scratch outside of coursework.",
       tags: ["MERN", "Java", "Robotics"]
     }
   ],
@@ -47,8 +51,8 @@ const PROFILE = {
   skills: [
     {
       name: "Java",
-      where: ["Library Management System", "Data Structures coursework"],
-      how: "Implemented OOP concepts (classes, encapsulation), file/data handling, and CRUD-style flows for managing books and borrowers."
+      where: ["Library Management System", "Data Structures coursework", "OOP1 lectures (ACS)"],
+      how: "Implemented OOP concepts (classes, encapsulation), file/data handling, and CRUD-style flows for managing books and borrowers. Also taught Java OOP to junior students via ACS YouTube lectures."
     },
     {
       name: "JavaScript",

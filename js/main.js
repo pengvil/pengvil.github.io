@@ -212,6 +212,7 @@ function renderExperience() {
 
   el.innerHTML = items.map(e => {
     const tags = (e.tags || []).map(t => `<span class="timeline-tag">${t}</span>`).join("");
+    const links = (e.links || []).map(l => `<a class="timeline-link" href="${l.url}" target="_blank" rel="noreferrer">↗ ${l.label}</a>`).join("");
     return `
       <div class="timeline-item">
         <div class="timeline-header">
@@ -220,6 +221,7 @@ function renderExperience() {
           ${e.period ? `<span class="timeline-period">${e.period}</span>` : ""}
         </div>
         <p class="timeline-desc">${e.desc || ""}</p>
+        ${links ? `<div class="timeline-links">${links}</div>` : ""}
         ${tags ? `<div class="timeline-tags">${tags}</div>` : ""}
       </div>
     `;
