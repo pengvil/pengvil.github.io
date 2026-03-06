@@ -171,7 +171,25 @@ if (typeof PROFILE === "undefined") {
 
   setText("navName", PROFILE.name);
   setText("heroName", PROFILE.name);
-  setText("heroRole", PROFILE.role);
+    function typeWrite(el, text, speed = 60) {
+    el.textContent = "";
+    let i = 0;
+    const cursor = document.createElement("span");
+    cursor.textContent = "|";
+    cursor.style.cssText = "animation: blink 0.7s step-end infinite; opacity:1;";
+    el.appendChild(cursor);
+    const interval = setInterval(() => {
+      el.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        setTimeout(() => cursor.remove(), 1200);
+      }
+    }, speed);
+  }
+
+  const heroRoleEl = document.getElementById("heroRole");
+  if (heroRoleEl) typeWrite(heroRoleEl, PROFILE.role);
 
   setText("aboutTitle", PROFILE.aboutTitle || "About Me");
   setText("aboutText", PROFILE.aboutText || "");
