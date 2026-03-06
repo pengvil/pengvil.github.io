@@ -15,23 +15,17 @@ const PROFILE = {
 
   experience: [
     {
-      title: "Course Instructor — AIUB Course Solution (ACS)",
+      title: "CS Instructor — AIUB Course Solution (ACS)",
       type: "Teaching",
       period: "2024 — Present",
-      desc: "Creating and publishing lecture series for AIUB Course Solution (ACS) — the largest student community platform at AIUB. Produced a 13-video OOP1 (Java) playlist for 4th semester students and a 10-video Data Structure Final Term series. Currently producing the Algorithm course. All lectures are freely available on YouTube.",
+      desc: "Teaching CS courses for AIUB Course Solution (ACS) on YouTube. Courses include OOP1 (Java) and Data Structure. Currently producing the Algorithm course.",
       links: [
-        { label: "OOP1 Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOOBGDp_w7Gwh5_1Qik2Kzm9" },
-        { label: "Data Structure Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOO_O_XK8Qj8lClldwQ66H-J" }
+        { label: "↗ OOP1 Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOOBGDp_w7Gwh5_1Qik2Kzm9" },
+        { label: "↗ Data Structure Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOO_O_XK8Qj8lClldwQ66H-J" }
       ],
-      tags: ["Java", "OOP", "Data Structures", "Algorithms", "YouTube"]
+      tags: ["Java", "OOP", "Data Structures", "Algorithms"]
     },
-    {
-      title: "BSc in Computer Science & Engineering — AIUB",
-      type: "Education",
-      period: "2022 — Present",
-      desc: "Currently in 6th semester at American International University-Bangladesh (AIUB). Coursework spans OOP, Data Structures, Algorithms, computer networks, and software engineering. Active in research and independent project development alongside studies.",
-      tags: ["AIUB", "CSE", "6th Semester"]
-    },
+
     {
       title: "Independent Research Contributor",
       type: "Research",
