@@ -7,11 +7,42 @@ const PROFILE = {
 
   aboutTitle: "About Me",
   aboutText:
-    "I’m a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.",
+    "I'm a CSE student at AIUB focused on building real-world software projects, exploring AI/ML (NLP), and robotics. I enjoy clean UI, practical engineering, and research-driven problem solving.",
 
   email: "zinavilofficial@gmail.com",
   github: "https://github.com/pengvil",
   linkedin: "https://www.linkedin.com/in/md-zahidul-islam-navil/",
+
+  experience: [
+    {
+      title: "Self-Directed Learning — YouTube & Online Resources",
+      type: "Learning",
+      period: "2022 — Present",
+      desc: "Continuously learning through YouTube channels and online tutorials covering web development, algorithms, AI/ML concepts, and system design. Key channels include Traversy Media, Fireship, and CS Dojo.",
+      tags: ["Web Dev", "AI/ML", "Algorithms"]
+    },
+    {
+      title: "BSc in Computer Science & Engineering",
+      type: "Education",
+      period: "2022 — Present",
+      desc: "Studying at American International University-Bangladesh (AIUB). Coursework covers data structures, OOP, computer networks, and software engineering. Active in project-based learning and research.",
+      tags: ["AIUB", "CSE", "Research"]
+    },
+    {
+      title: "Independent Research Contributor",
+      type: "Research",
+      period: "2023 — Present",
+      desc: "Co-authored two research papers on vernacular AI for cyber safety in Bangladesh and laser-matter interaction studies for precision manufacturing. Both papers explore applied technology for real-world impact.",
+      tags: ["NLP", "Blockchain", "Laser Tech"]
+    },
+    {
+      title: "Open Source & Personal Projects",
+      type: "Projects",
+      period: "2023 — Present",
+      desc: "Built and deployed full-stack and hardware projects independently — including an ecommerce platform (MERN), a Java library management system, and a PID-controlled line-following robot.",
+      tags: ["MERN", "Java", "Robotics"]
+    }
+  ],
 
   skills: [
     {
@@ -55,6 +86,7 @@ const PROFILE = {
       how: "Used version control (commit/push), managed repository structure, and deployed using GitHub Pages."
     }
   ],
+
   projects: [
     {
       title: "Ecommerce Store",

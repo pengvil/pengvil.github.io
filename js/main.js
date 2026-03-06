@@ -203,6 +203,29 @@ function renderSkills() {
   });
 }
 
+/* ---------- Experience timeline ---------- */
+function renderExperience() {
+  const el = document.getElementById("experienceTimeline");
+  if (!el) return;
+  const items = (window.PROFILE && Array.isArray(PROFILE.experience)) ? PROFILE.experience : [];
+  if (items.length === 0) { el.innerHTML = ""; return; }
+
+  el.innerHTML = items.map(e => {
+    const tags = (e.tags || []).map(t => `<span class="timeline-tag">${t}</span>`).join("");
+    return `
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-title">${e.title || ""}</span>
+          ${e.type ? `<span class="timeline-type">${e.type}</span>` : ""}
+          ${e.period ? `<span class="timeline-period">${e.period}</span>` : ""}
+        </div>
+        <p class="timeline-desc">${e.desc || ""}</p>
+        ${tags ? `<div class="timeline-tags">${tags}</div>` : ""}
+      </div>
+    `;
+  }).join("");
+}
+
 /* ---------- Fill content ---------- */
 if (typeof PROFILE === "undefined") {
   console.error("PROFILE not found. Ensure data/profile.js loads before js/main.js");
@@ -233,6 +256,7 @@ if (typeof PROFILE === "undefined") {
   }
 
   // Render sections then apply tilt
+  renderExperience();
   renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
   renderGrid("researchGrid", PROFILE.research, researchCardHTML);
   renderSkills();
