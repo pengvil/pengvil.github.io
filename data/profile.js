@@ -20,8 +20,8 @@ const PROFILE = {
       period: "2024 — Present",
       desc: "Teaching CS courses for AIUB Course Solution (ACS) on YouTube. Courses include OOP1 (Java) and Data Structure. Currently producing the Algorithm course.",
       links: [
-        { label: "↗ OOP1 Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOOBGDp_w7Gwh5_1Qik2Kzm9" },
-        { label: "↗ Data Structure Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOO_O_XK8Qj8lClldwQ66H-J" }
+        { label: "↗ OOP1 Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOO_O_XK8Qj8lClldwQ66H-J" },
+        { label: "↗ Data Structure Playlist", url: "https://youtube.com/playlist?list=PLCVg_gjNmHOOBGDp_w7Gwh5_1Qik2Kzm9" }
       ],
       tags: ["Java", "OOP", "Data Structures", "Algorithms"]
     },
