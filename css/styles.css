@@ -610,3 +610,18 @@ body{
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
 }
+/* =========================
+   Typing cursor blink
+   ========================= */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* =========================
+   Card tilt: GPU hint
+   ========================= */
+.card {
+  will-change: transform;
+  transform-style: preserve-3d;
+}

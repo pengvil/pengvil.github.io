@@ -45,9 +45,49 @@ if (cursorGlow) {
   };
 
   window.addEventListener("mousemove", updateGlow, { passive: true });
-
   window.addEventListener("mouseleave", () => (cursorGlow.style.opacity = "0"));
-  window.addEventListener("mouseenter", () => (cursorGlow.style.opacity = "1"));
+}
+
+/* ---------- Typing animation ---------- */
+function typeWrite(el, text, speed = 60) {
+  el.textContent = "";
+  let i = 0;
+  const cursor = document.createElement("span");
+  cursor.textContent = "|";
+  cursor.style.cssText = "animation: blink 0.7s step-end infinite; opacity: 1;";
+  el.appendChild(cursor);
+  const interval = setInterval(() => {
+    el.insertBefore(document.createTextNode(text[i]), cursor);
+    i++;
+    if (i >= text.length) {
+      clearInterval(interval);
+      setTimeout(() => cursor.remove(), 1200);
+    }
+  }, speed);
+}
+
+/* ---------- 3D card tilt ---------- */
+function applyTilt() {
+  document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("mouseenter", () => {
+      card.style.transition = "transform 0.1s ease";
+    });
+    card.addEventListener("mousemove", (e) => {
+      const { left, top, width, height } = card.getBoundingClientRect();
+      const x = (e.clientX - left) / width  - 0.5;
+      const y = (e.clientY - top)  / height - 0.5;
+      card.style.transform = `
+        perspective(600px)
+        rotateX(${(-y * 12).toFixed(2)}deg)
+        rotateY(${( x * 12).toFixed(2)}deg)
+        translateY(-6px)
+      `;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transition = "transform 0.5s ease";
+      card.style.transform = "";
+    });
+  });
 }
 
 /* ---------- Cards ---------- */
@@ -171,23 +211,8 @@ if (typeof PROFILE === "undefined") {
 
   setText("navName", PROFILE.name);
   setText("heroName", PROFILE.name);
-    function typeWrite(el, text, speed = 60) {
-    el.textContent = "";
-    let i = 0;
-    const cursor = document.createElement("span");
-    cursor.textContent = "|";
-    cursor.style.cssText = "animation: blink 0.7s step-end infinite; opacity:1;";
-    el.appendChild(cursor);
-    const interval = setInterval(() => {
-      el.insertBefore(document.createTextNode(text[i]), cursor);
-      i++;
-      if (i >= text.length) {
-        clearInterval(interval);
-        setTimeout(() => cursor.remove(), 1200);
-      }
-    }, speed);
-  }
 
+  // Typing animation for role
   const heroRoleEl = document.getElementById("heroRole");
   if (heroRoleEl) typeWrite(heroRoleEl, PROFILE.role);
 
@@ -207,10 +232,11 @@ if (typeof PROFILE === "undefined") {
     heroPhoto.alt = `${PROFILE.name} profile photo`;
   }
 
-  // Render sections
+  // Render sections then apply tilt
   renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
   renderGrid("researchGrid", PROFILE.research, researchCardHTML);
   renderSkills();
+  applyTilt();
 
   // Footer icon links
   const fGithub = document.getElementById("fGithub");
