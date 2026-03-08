@@ -297,3 +297,52 @@ if (typeof PROFILE === "undefined") {
     });
   }
 }
+
+// ── Music Player ──
+(function () {
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  const player = document.getElementById('musicPlayer');
+  const volumeSlider = document.getElementById('musicVolume');
+  const icon = btn.querySelector('.music-icon');
+  const label = btn.querySelector('.music-label');
+
+  audio.volume = 0.3;
+  let playing = false;
+
+  function startMusic() {
+    audio.play().then(() => {
+      playing = true;
+      icon.textContent = '🎶';
+      label.textContent = 'Pause';
+      btn.classList.add('playing');
+      player.classList.add('expanded');
+    }).catch(() => {});
+  }
+
+  function stopMusic() {
+    audio.pause();
+    playing = false;
+    icon.textContent = '🎵';
+    label.textContent = 'Music';
+    btn.classList.remove('playing');
+    player.classList.remove('expanded');
+  }
+
+  btn.addEventListener('click', () => {
+    playing ? stopMusic() : startMusic();
+  });
+
+  volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+  });
+
+  // Auto-play on first user interaction with the page
+  let autoStarted = false;
+  document.addEventListener('click', function tryAutoPlay(e) {
+    if (autoStarted || e.target === btn) return;
+    autoStarted = true;
+    startMusic();
+    document.removeEventListener('click', tryAutoPlay);
+  }, { once: false });
+})();
