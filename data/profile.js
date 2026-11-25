@@ -1,7 +1,7 @@
 const PROFILE = {
   name: "Md. Zahidul Islam Navil",
   role: "AI/ML & Software Engineering",
-  photoUrl: "assets/profile/navil_main.png",
+  photoUrl: "assets/profile/navil_main.jpg",
 
   cvUrl: "CV.pdf",
 
