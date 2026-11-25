@@ -93,6 +93,7 @@ function applyTilt() {
 /* ---------- Cards ---------- */
 function projectCardHTML(p) {
   const img = p.image ? `<img src="${p.image}" alt="${p.title}">` : "";
+  const tags = (p.tags || []).map(t => `<span class="timeline-tag">${t}</span>`).join("");
   const live = safeLink(p.live)
     ? `<a href="${p.live}" target="_blank" rel="noreferrer">↗ Live</a>`
     : "";
@@ -106,6 +107,7 @@ function projectCardHTML(p) {
       <div class="card-body">
         <h3>${p.title || ""}</h3>
         <p>${p.desc || ""}</p>
+        ${tags ? `<div class="card-tags">${tags}</div>` : ""}
         <div class="card-links">${live}${gh}</div>
       </div>
     </div>
@@ -113,6 +115,7 @@ function projectCardHTML(p) {
 }
 
 function researchCardHTML(r) {
+  const tags = (r.tags || []).map(t => `<span class="timeline-tag">${t}</span>`).join("");
   const paper = safeLink(r.paper)
     ? `<a href="${r.paper}" target="_blank" rel="noreferrer">↗ Paper</a>`
     : "";
@@ -125,6 +128,7 @@ function researchCardHTML(r) {
       <div class="card-body">
         <h3>${r.title || ""}</h3>
         <p>${r.desc || ""}</p>
+        ${tags ? `<div class="card-tags">${tags}</div>` : ""}
         <div class="card-links">${paper}${repo}</div>
       </div>
     </div>
@@ -203,6 +207,52 @@ function renderSkills() {
   });
 }
 
+/* ---------- Education & Honors highlights ---------- */
+function renderHighlights() {
+  const container = document.getElementById("aboutHighlights");
+  if (!container || typeof PROFILE === "undefined") return;
+
+  const edu = Array.isArray(PROFILE.education) ? PROFILE.education : [];
+  const certs = Array.isArray(PROFILE.certifications) ? PROFILE.certifications : [];
+  if (edu.length === 0 && certs.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const eduHTML = edu.length
+    ? `
+      <div class="highlights-block">
+        <h3 class="skills-title">Education</h3>
+        <div class="edu-grid">
+          ${edu.map(item => `
+            <div class="edu-card">
+              <div class="edu-top">
+                <span class="edu-school">${item.school || ""}</span>
+                <span class="edu-period">${item.period || ""}</span>
+              </div>
+              <div class="edu-degree">${item.degree || ""}</div>
+              ${item.detail ? `<div class="edu-detail">${item.detail}</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `
+    : "";
+
+  const certsHTML = certs.length
+    ? `
+      <div class="highlights-block">
+        <h3 class="skills-title">Certifications &amp; Honors</h3>
+        <div class="cert-list">
+          ${certs.map(c => `<span class="timeline-tag">${c}</span>`).join("")}
+        </div>
+      </div>
+    `
+    : "";
+
+  container.innerHTML = eduHTML + certsHTML;
+}
+
 /* ---------- Experience timeline ---------- */
 function renderExperience() {
   const el = document.getElementById("experienceTimeline");
@@ -258,6 +308,7 @@ if (typeof PROFILE === "undefined") {
   }
 
   // Render sections then apply tilt
+  renderHighlights();
   renderExperience();
   renderGrid("projectsGrid", PROFILE.projects, projectCardHTML);
   renderGrid("researchGrid", PROFILE.research, researchCardHTML);
