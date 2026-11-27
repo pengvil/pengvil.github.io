@@ -7,7 +7,7 @@ const PROFILE = {
 
   aboutTitle: "About Me",
   aboutText:
-    "I'm a B.Sc. Computer Science & Engineering student (Major: Software Engineering) at AIUB maintaining a 3.99/4.00 CGPA (Dean's List, Expected Jan. 2028), focused on applied AI/ML, full-stack & desktop software engineering, and autonomous systems. Alongside university, I train in Phitron's AI/ML Expert (Batch 01) & CS Fundamentals (Batch 07) tracks, teach CS to thousands of students at AIUB Course Solution (ACS), and first-authored two 2025 conference papers.",
+    "I'm a B.Sc. Computer Science & Engineering student (Major: Software Engineering) at AIUB maintaining a 3.99/4.00 CGPA (Consecutive Dean's List across all eligible semesters, Expected Jan. 2028), focused on applied AI/ML, TinyML/embedded systems, and full-stack & desktop software engineering. Alongside university, I train in Phitron's AI/ML Expert (Batch 01) & CS Fundamentals (Batch 07) tracks, teach CS at AIUB Course Solution (ACS), and first-authored a 2025 conference paper on quantitative laser–matter analytics.",
 
   email: "zahidul.islam.navil@gmail.com",
   github: "https://github.com/pengvil",
@@ -18,7 +18,7 @@ const PROFILE = {
       school: "American International University-Bangladesh (AIUB)",
       degree: "B.Sc. in Computer Science & Engineering (Major: Software Engineering)",
       period: "Expected Jan. 2028",
-      detail: "CGPA: 3.99 / 4.00 • Dean's List Honor"
+      detail: "CGPA: 3.99 / 4.00 • Consecutive Dean's List Honors"
     },
     {
       school: "Phitron — Technical Training Programs",
@@ -35,10 +35,9 @@ const PROFILE = {
   ],
 
   certifications: [
-    "AIUB Dean's List Honor (CGPA 3.99 / 4.00)",
-    "Complete JavaScript Course & Node.js/Express/MongoDB Bootcamp (Udemy)",
-    "Web Development Course (Programming Hero)",
-    "GitHub Student Developer"
+    "AIUB Consecutive Dean's List Honors (All Eligible Semesters — CGPA 3.99 / 4.00)",
+    "Cisco IT Essentials",
+    "CS Fundamentals Track — Batch 07 (Phitron)"
   ],
 
   experience: [
@@ -61,29 +60,29 @@ const PROFILE = {
       tags: ["Python", "ML / DL", "NLP", "C/C++", "Algorithms"]
     },
     {
-      title: "First Author & Applied Computing Researcher",
+      title: "First Author & Quantitative Analytics Researcher",
       type: "Research",
       period: "2025",
-      desc: "First-authored two 2025 conference papers — one training a vernacular-first MLP NLP classifier for Bangla/Banglish (91.2% accuracy, 90.1% F1-score) integrated with a zero-knowledge Blockchain reporting ledger, and another formulating a Laser Precision Index across longitudinal Optica/SPIE benchmarks (1995–2024).",
-      tags: ["NLP", "Blockchain", "Quantitative Analytics", "Python"]
+      desc: "First-authored a 2025 conference paper analyzing longitudinal experimental benchmarks (1995–2024) from Optica (OSA) and SPIE to formulate a standardized Laser Precision Index capturing 90% precision, 85% manufacturing efficiency, and 80% biomedical accuracy.",
+      tags: ["Quantitative Analytics", "Optica / SPIE", "Research"]
     }
   ],
 
   skills: [
     {
       name: "Python",
-      where: ["Tour de Mars terrain pipeline (Rasterio, NumPy)", "Phitron AI/ML Expert (Batch 01)", "NLP & Quantitative Analytics research"],
+      where: ["Tour de Mars terrain pipeline (Rasterio, NumPy)", "Phitron AI/ML Expert (Batch 01)", "Quantitative Analytics research"],
       how: "Built geospatial raster preprocessing pipelines reprojecting USGS/NASA GeoTIFF elevation data onto equirectangular grids, and implemented ML/data workflows with NumPy, Pandas, and Scikit-Learn."
     },
     {
-      name: "AI / ML & NLP",
-      where: ["Cyber-Safety Vernacular AI Conference Paper (2025)", "Phitron AI/ML Expert (Batch 01)"],
-      how: "Trained a vernacular-first Multi-Layer Perceptron (MLP) NLP classifier fine-tuned for Bangla, Banglish, and regional slang achieving 91.2% accuracy and 90.1% F1-score; trained in EDA, feature engineering, regression, SVM, ensembles, DL, and CV/NLP."
+      name: "AI / ML & TinyML",
+      where: ["HandEcho (ESP32-S3 / STM32 TFLM INT8 CNN)", "Phitron AI/ML Expert (Batch 01)"],
+      how: "Architecting an INT8 quantized CNN pipeline (96×96 grayscale ROI) via TensorFlow Lite for Microcontrollers with temporal stability filtering; trained in EDA, feature engineering, regression, SVM, ensembles, DL, and CV/NLP."
     },
     {
       name: "C / C++",
-      where: ["Autonomous Line-Following Robot (LFR)", "Phitron CS Fundamentals (Batch 07)"],
-      how: "Programmed an Arduino microcontroller in C++ for real-time IR sensor array processing and closed-loop PID motor control; mastered DSA, graphs, shortest paths, and dynamic programming in C++."
+      where: ["HandEcho (ESP32-S3 / STM32 Firmware)", "Phitron CS Fundamentals (Batch 07)"],
+      how: "Developing embedded C/C++ firmware integrating OV2640 DVP camera DMA capture, TFLM inference, and MAX98357A I2S audio synthesis; mastered DSA, graphs, shortest paths, and dynamic programming in C++."
     },
     {
       name: "C# & .NET",
@@ -102,18 +101,13 @@ const PROFILE = {
     },
     {
       name: "JavaScript",
-      where: ["Tour de Mars (NASA Space Apps Challenge)", "Portfolio website", "Complete JS Course (Udemy)"],
+      where: ["Tour de Mars (NASA Space Apps Challenge)", "Portfolio website"],
       how: "Implemented an 8-neighbor Dijkstra pathfinding engine, MarsWalk canvas rendering, GeoTIFF.js terrain parsing, and interactive DOM components."
     },
     {
-      name: "Web & Backend",
-      where: ["Node.js/Express/MongoDB Bootcamp (Udemy)", "Programming Hero Web Dev", "Tour de Mars"],
-      how: "Trained and built responsive UIs and RESTful APIs using React.js, Node.js, Express.js, MongoDB, HTML5 Canvas, and Vercel deployments."
-    },
-    {
-      name: "Geospatial & Robotics",
-      where: ["Tour de Mars (MarsWalk)", "Autonomous Line-Following Robot (LFR)"],
-      how: "Integrated NASA/JPL Mars Trek WMTS layers, GeoTIFF.js elevation rasters, and 4-mode Dijkstra EVA routing; calibrated IR sensors and tuned PID control loops for autonomous navigation."
+      name: "Geospatial & Embedded",
+      where: ["Tour de Mars (MarsWalk)", "HandEcho (AIUB Microprocessor Capstone)"],
+      how: "Integrated NASA/JPL Mars Trek WMTS layers, GeoTIFF.js elevation rasters, and 4-mode Dijkstra EVA routing; designed OV2640 DVP, ESP32-S3/STM32, and MAX98357A I2S hardware interfaces."
     },
     {
       name: "Git & GitHub",
@@ -132,17 +126,17 @@ const PROFILE = {
       tags: ["Python", "Rasterio", "NumPy", "JavaScript", "GeoTIFF.js", "NASA WMTS"]
     },
     {
+      title: "HandEcho: TinyML Hand Gesture-to-Speech System",
+      desc: "Designing an offline assistive sign-language-to-speech embedded prototype (AIUB Microprocessor Capstone) integrating an OV2640 DVP camera, ESP32-S3/STM32 MCU, MAX98357A I2S amplifier, and an INT8 quantized TFLM CNN targeting ≥92% accuracy and ≤180 ms latency.",
+      image: "assets/projects/HandEcho/UI.png",
+      tags: ["ESP32-S3 / STM32", "TinyML (TFLM)", "INT8 CNN", "OV2640", "I2S Audio", "C/C++"]
+    },
+    {
       title: "Water & Sewage Management System (WSMS)",
       desc: "Engineered a 4-role C# Windows Forms desktop application (Admin, Customer, Service Officer, Maintenance Engineer) backed by a 3NF-normalized 10-table Microsoft SQL Server database automating billing, disputes, complaints, connections, and maintenance.",
       image: "assets/projects/WSMS/UI.png",
       github: "https://github.com/pengvil/WASA_2.0",
       tags: ["C#", "Windows Forms", "MS SQL Server (3NF)", "OOP"]
-    },
-    {
-      title: "Autonomous Line-Following Robot (LFR)",
-      desc: "Programmed an Arduino microcontroller in C++ for real-time IR sensor array processing and closed-loop PID motor control for autonomous high-precision path tracking.",
-      image: "assets/projects/Line_Follower_Robot/The_Bot.png",
-      tags: ["C++", "Arduino", "PID Control", "IR Sensors"]
     },
     {
       title: "Library Management System",
@@ -154,14 +148,6 @@ const PROFILE = {
   ],
 
   research: [
-    {
-      title: "Cyber-Safety Transformation via Vernacular AI & Blockchain (2025)",
-      desc: "First-authored conference paper training a vernacular-first MLP NLP classifier for Bangla, Banglish, and regional slang (91.2% accuracy, 90.1% F1-score), paired with a zero-knowledge Blockchain reporting ledger reducing triage time from 3–5 days to 1–2 minutes.",
-      paper:
-        "assets/papers/Transforming Cyber Safety in Bangladesh through Vernacular AI and Blockchain to Ensure a Harassment Free Space for Women and Children.pdf",
-      repo: "#",
-      tags: ["First Author", "2025", "NLP (MLP)", "Blockchain"]
-    },
     {
       title: "Laser–Matter Interaction Studies for Precision Manufacturing (2025)",
       desc: "First-authored conference paper analyzing longitudinal experimental benchmarks (1995–2024) from Optica (OSA) and SPIE to formulate a standardized Laser Precision Index capturing 90% precision, 85% manufacturing efficiency, and 80% biomedical accuracy.",
